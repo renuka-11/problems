@@ -1,0 +1,26 @@
+class Solution {
+    public int getMinDiff(int[] arr, int k) {
+        // code here
+        int n=arr.length;
+        if(n==1) return 0;
+        Arrays.sort(arr);
+        int ans=arr[n-1]-arr[0];
+        int small=arr[0]+k;
+        int big=arr[n-1]-k;
+        if(small>big){
+            int temp=small;
+            small=big;
+            big=temp;
+        }
+        for(int i=1;i<n;i++){
+            int subtract=arr[i]-k;
+         
+            if(subtract<0) continue;
+            int add=arr[i-1]+k;
+            int minH=Math.min(small,subtract);
+            int maxH=Math.max(big,add);
+            ans=Math.min(ans,maxH-minH);
+        }
+        return ans;
+    }
+}
